@@ -17,5 +17,9 @@ public:
 
 private:
     Ui::MainWindow *ui;
+
+private slots:
+    void bgColourChanged();
 };
 #endif // MAINWINDOW_H
+

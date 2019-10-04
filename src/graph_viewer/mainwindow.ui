@@ -15,6 +15,20 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <widget class="QComboBox" name="cbToolMode">
+      <item>
+       <property name="text">
+        <string>Edit graph</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Visualization</string>
+       </property>
+      </item>
+     </widget>
+    </item>
     <item row="1" column="0">
      <widget class="QStackedWidget" name="swTools">
       <property name="minimumSize">
@@ -116,7 +130,79 @@
         <property name="bottomMargin">
          <number>0</number>
         </property>
-        <item row="0" column="0">
+        <item row="1" column="2">
+         <widget class="QSpinBox" name="sbBCRed">
+          <property name="maximum">
+           <number>255</number>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="2">
+         <widget class="QSpinBox" name="sbBCGreen">
+          <property name="maximum">
+           <number>255</number>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <widget class="QSlider" name="hsBCBlue">
+          <property name="maximum">
+           <number>255</number>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QSlider" name="hsBCGreen">
+          <property name="maximum">
+           <number>255</number>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QSlider" name="hsBCRed">
+          <property name="maximum">
+           <number>255</number>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="2">
+         <widget class="QSpinBox" name="sbBCBlue">
+          <property name="maximum">
+           <number>255</number>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="label_4">
+          <property name="text">
+           <string>Red:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="label_5">
+          <property name="text">
+           <string>Green:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <widget class="QLabel" name="label_6">
+          <property name="text">
+           <string>Blue:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0" colspan="3">
          <widget class="QLabel" name="label_3">
           <property name="text">
            <string>Background:</string>
@@ -127,22 +213,8 @@
       </widget>
      </widget>
     </item>
-    <item row="0" column="0">
-     <widget class="QComboBox" name="cbToolMode">
-      <item>
-       <property name="text">
-        <string>Edit graph</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>Visualization</string>
-       </property>
-      </item>
-     </widget>
-    </item>
     <item row="0" column="1" rowspan="2">
-     <widget class="GraphViewer" name="openGLWidget">
+     <widget class="GraphViewer" name="graphViewer">
       <property name="minimumSize">
        <size>
         <width>300</width>

@@ -9,6 +9,8 @@ GraphViewer::GraphViewer(QWidget *parent) :
     colours = vertexes = nullptr;
     fragmentShader = vertexShader = nullptr;
     vboColours = vboIndexes = vboVertexes = nullptr;
+
+    bgR = bgG = bgB = bgA = 0;
 }
 
 GraphViewer::~GraphViewer(){
@@ -29,10 +31,10 @@ void GraphViewer::createVBOs(){
     delete [] indexes;
     indexes = new unsigned int[2 * 3];
 
-    vertexes[0] = QVector4D(-0.5f, -0.5f, 0, 1);
-    vertexes[1] = QVector4D(0.5f, -0.5f, 0, 1);
-    vertexes[2] = QVector4D(0.5f, 0.5f, 0, 1);
-    vertexes[3] = QVector4D(-0.5f, 0.5f, 0, 1);
+    vertexes[0] = QVector4D(-0.5f, -0.5f, 0.0f, 1);
+    vertexes[1] = QVector4D(0.5f, -0.5f, 0.0f, 1);
+    vertexes[2] = QVector4D(0.5f, 0.5f, 0.0f, 1);
+    vertexes[3] = QVector4D(-0.5f, 0.5f, 0.0f, 1);
 
     colours[0] = QVector4D(1, 0, 0, 1);
     colours[1] = QVector4D(0, 1, 0, 1);
@@ -42,9 +44,9 @@ void GraphViewer::createVBOs(){
     indexes[0] = 0;
     indexes[1] = 1;
     indexes[2] = 2;
-    indexes[3] = 3;
-    indexes[4] = 4;
-    indexes[5] = 5;
+    indexes[3] = 2;
+    indexes[4] = 3;
+    indexes[5] = 0;
 
     vao = new QOpenGLVertexArrayObject(this);
     vao->create();
@@ -155,6 +157,16 @@ void GraphViewer::destroyShaders(){
     }
 }
 
+void GraphViewer::setBackgroundColour(float r, float g, float b, float a){
+    bgR = r;
+    bgG = g;
+    bgB = b;
+    bgA = a;
+
+    makeCurrent();
+    update();
+}
+
 void GraphViewer::initializeGL(){
     initializeOpenGLFunctions();
     createShaders();
@@ -167,7 +179,7 @@ void GraphViewer::resizeGL(int w, int h){
 
 void GraphViewer::paintGL(){
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glClearColor(1, 0, 0, 1);
+    glClearColor(bgR, bgG, bgB, bgA);
 
     vao->bind();
     shaderProgram->bind();
