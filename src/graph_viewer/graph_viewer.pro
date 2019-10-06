@@ -15,18 +15,25 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-INCLUDEPATH += ./viewer
+INCLUDEPATH += viewer/ \
+    editors/
 
 SOURCES += \
+    editors/edgeattributes.cpp \
+    editors/nodeattributes.cpp \
     main.cpp \
     mainwindow.cpp \
     viewer/graphviewer.cpp
 
 HEADERS += \
+    editors/edgeattributes.h \
+    editors/nodeattributes.h \
     mainwindow.h \
     viewer/graphviewer.h
 
 FORMS += \
+    editors/edgeattributes.ui \
+    editors/nodeattributes.ui \
     mainwindow.ui
 
 # Default rules for deployment.

@@ -11,6 +11,13 @@ MainWindow::MainWindow(QWidget *parent)
     ui->sbBCBlue->findChild<QLineEdit *>()->setReadOnly(true);
     ui->sbBCGreen->findChild<QLineEdit *>()->setReadOnly(true);
 
+    connect(ui->btCreateEdge, &QPushButton::clicked, [this]{
+        edgeEditor.show();
+    });
+    connect(ui->btCreateNode, &QPushButton::clicked, [this]{
+        nodeEditor.show();
+    });
+
     connect(ui->hsBCRed, &QSlider::valueChanged, ui->sbBCRed, &QSpinBox::setValue);
     connect(ui->hsBCBlue, &QSlider::valueChanged, ui->sbBCBlue, &QSpinBox::setValue);
     connect(ui->hsBCGreen, &QSlider::valueChanged, ui->sbBCGreen, &QSpinBox::setValue);

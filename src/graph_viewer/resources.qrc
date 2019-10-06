@@ -3,4 +3,16 @@
         <file>glsl/vshader1.glsl</file>
         <file>glsl/fshader1.glsl</file>
     </qresource>
+    <qresource prefix="/icons">
+        <file>icons/about_alt.svg</file>
+        <file>icons/about_alt_w.svg</file>
+        <file>icons/new.svg</file>
+        <file>icons/new_w.svg</file>
+        <file>icons/open.svg</file>
+        <file>icons/open_w.svg</file>
+        <file>icons/save.svg</file>
+        <file>icons/save_as.svg</file>
+        <file>icons/save_as_w.svg</file>
+        <file>icons/save_w.svg</file>
+    </qresource>
 </RCC>

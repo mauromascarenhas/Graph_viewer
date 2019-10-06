@@ -16,6 +16,95 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
     <item row="0" column="0">
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QPushButton" name="btOpen">
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="resources.qrc">
+          <normaloff>:/icons/icons/open.svg</normaloff>:/icons/icons/open.svg</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>40</width>
+          <height>40</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btNew">
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="resources.qrc">
+          <normaloff>:/icons/icons/new.svg</normaloff>:/icons/icons/new.svg</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>40</width>
+          <height>40</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btSave">
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="resources.qrc">
+          <normaloff>:/icons/icons/save.svg</normaloff>:/icons/icons/save.svg</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>40</width>
+          <height>40</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btSaveAs">
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="resources.qrc">
+          <normaloff>:/icons/icons/save_as.svg</normaloff>:/icons/icons/save_as.svg</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>40</width>
+          <height>40</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btAbout">
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="resources.qrc">
+          <normaloff>:/icons/icons/about_alt.svg</normaloff>:/icons/icons/about_alt.svg</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>40</width>
+          <height>40</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="1" column="0">
      <widget class="QComboBox" name="cbToolMode">
       <item>
        <property name="text">
@@ -29,7 +118,7 @@
       </item>
      </widget>
     </item>
-    <item row="1" column="0">
+    <item row="2" column="0">
      <widget class="QStackedWidget" name="swTools">
       <property name="minimumSize">
        <size>
@@ -61,17 +150,17 @@
          <number>0</number>
         </property>
         <item row="1" column="0" colspan="2">
-         <widget class="QListWidget" name="listWidget"/>
+         <widget class="QListWidget" name="lwNodes"/>
         </item>
         <item row="2" column="0">
-         <widget class="QPushButton" name="pushButton">
+         <widget class="QPushButton" name="btCreateNode">
           <property name="text">
            <string>+</string>
           </property>
          </widget>
         </item>
         <item row="2" column="1">
-         <widget class="QPushButton" name="pushButton_2">
+         <widget class="QPushButton" name="btDeleteNode">
           <property name="enabled">
            <bool>false</bool>
           </property>
@@ -81,17 +170,17 @@
          </widget>
         </item>
         <item row="4" column="0" colspan="2">
-         <widget class="QListWidget" name="listWidget_2"/>
+         <widget class="QListWidget" name="lwEdges"/>
         </item>
         <item row="5" column="0">
-         <widget class="QPushButton" name="pushButton_3">
+         <widget class="QPushButton" name="btCreateEdge">
           <property name="text">
            <string>+</string>
           </property>
          </widget>
         </item>
         <item row="5" column="1">
-         <widget class="QPushButton" name="pushButton_4">
+         <widget class="QPushButton" name="btDeleteEdge">
           <property name="enabled">
            <bool>false</bool>
           </property>
@@ -130,15 +219,39 @@
         <property name="bottomMargin">
          <number>0</number>
         </property>
-        <item row="1" column="2">
-         <widget class="QSpinBox" name="sbBCRed">
+        <item row="2" column="0">
+         <widget class="QLabel" name="label_5">
+          <property name="text">
+           <string>Green:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <widget class="QLabel" name="label_6">
+          <property name="text">
+           <string>Blue:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="2">
+         <widget class="QSpinBox" name="sbBCBlue">
           <property name="maximum">
            <number>255</number>
           </property>
          </widget>
         </item>
-        <item row="2" column="2">
-         <widget class="QSpinBox" name="sbBCGreen">
+        <item row="2" column="1">
+         <widget class="QSlider" name="hsBCGreen">
+          <property name="maximum">
+           <number>255</number>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="2">
+         <widget class="QSpinBox" name="sbBCRed">
           <property name="maximum">
            <number>255</number>
           </property>
@@ -154,13 +267,17 @@
           </property>
          </widget>
         </item>
-        <item row="2" column="1">
-         <widget class="QSlider" name="hsBCGreen">
-          <property name="maximum">
-           <number>255</number>
+        <item row="1" column="0">
+         <widget class="QLabel" name="label_4">
+          <property name="text">
+           <string>Red:</string>
           </property>
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
+         </widget>
+        </item>
+        <item row="0" column="0" colspan="3">
+         <widget class="QLabel" name="label_3">
+          <property name="text">
+           <string>Background:</string>
           </property>
          </widget>
         </item>
@@ -174,46 +291,31 @@
           </property>
          </widget>
         </item>
-        <item row="3" column="2">
-         <widget class="QSpinBox" name="sbBCBlue">
+        <item row="2" column="2">
+         <widget class="QSpinBox" name="sbBCGreen">
           <property name="maximum">
            <number>255</number>
           </property>
          </widget>
         </item>
-        <item row="1" column="0">
-         <widget class="QLabel" name="label_4">
-          <property name="text">
-           <string>Red:</string>
+        <item row="4" column="0" colspan="3">
+         <spacer name="verticalSpacer">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
           </property>
-         </widget>
-        </item>
-        <item row="2" column="0">
-         <widget class="QLabel" name="label_5">
-          <property name="text">
-           <string>Green:</string>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
           </property>
-         </widget>
-        </item>
-        <item row="3" column="0">
-         <widget class="QLabel" name="label_6">
-          <property name="text">
-           <string>Blue:</string>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="0" colspan="3">
-         <widget class="QLabel" name="label_3">
-          <property name="text">
-           <string>Background:</string>
-          </property>
-         </widget>
+         </spacer>
         </item>
        </layout>
       </widget>
      </widget>
     </item>
-    <item row="0" column="1" rowspan="2">
+    <item row="0" column="1" rowspan="3">
      <widget class="GraphViewer" name="graphViewer">
       <property name="minimumSize">
        <size>
@@ -234,6 +336,8 @@
    <header>graphviewer.h</header>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
  <connections/>
 </ui>

@@ -3,6 +3,9 @@
 
 #include <QMainWindow>
 
+#include "edgeattributes.h"
+#include "nodeattributes.h"
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -17,6 +20,9 @@ public:
 
 private:
     Ui::MainWindow *ui;
+
+   EdgeAttributes edgeEditor;
+   NodeAttributes nodeEditor;
 
 private slots:
     void bgColourChanged();

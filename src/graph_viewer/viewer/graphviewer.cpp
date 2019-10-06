@@ -23,30 +23,67 @@ void GraphViewer::createVBOs(){
     destroyVBOs();
 
     delete [] colours;
-    colours = new QVector4D[4];
+    colours = new QVector4D[9];
 
     delete [] vertexes;
-    vertexes = new QVector4D[4];
+    vertexes = new QVector4D[9];
 
     delete [] indexes;
-    indexes = new unsigned int[2 * 3];
+    indexes = new unsigned int[8 * 3];
 
-    vertexes[0] = QVector4D(-0.5f, -0.5f, 0.0f, 1);
-    vertexes[1] = QVector4D(0.5f, -0.5f, 0.0f, 1);
-    vertexes[2] = QVector4D(0.5f, 0.5f, 0.0f, 1);
-    vertexes[3] = QVector4D(-0.5f, 0.5f, 0.0f, 1);
+    float sqrt2 = sqrt(2) * 0.25f;
 
-    colours[0] = QVector4D(1, 0, 0, 1);
-    colours[1] = QVector4D(0, 1, 0, 1);
-    colours[2] = QVector4D(0, 0, 1, 1);
-    colours[3] = QVector4D(1, 1, 0, 1);
+    vertexes[0] = QVector4D(0, 0, 0, 1);
+    vertexes[1] = QVector4D(0.5, 0, 0, 1);
+    vertexes[2] = QVector4D(sqrt2, sqrt2, 0, 1);
+    vertexes[3] = QVector4D(0, 0.5, 0, 1);
+    vertexes[4] = QVector4D(-sqrt2, sqrt2, 0, 1);
+    vertexes[5] = QVector4D(-0.5, 0, 0, 1);
+    vertexes[6] = QVector4D(-sqrt2, -sqrt2, 0, 1);
+    vertexes[7] = QVector4D(0, -0.5, 0, 1);
+    vertexes[8] = QVector4D(sqrt2, -sqrt2, 0, 1);
+
+    colours[0] = QVector4D(1, 1, 1, 1);
+    colours[1] = QVector4D(1, 1, 0, 1);
+    colours[2] = QVector4D(1, 1, 0, 1);
+    colours[3] = QVector4D(0, 1, 0, 1);
+    colours[4] = QVector4D(0, 1, 0, 1);
+    colours[5] = QVector4D(0, 1, 1, 1);
+    colours[6] = QVector4D(0, 1, 1, 1);
+    colours[7] = QVector4D(0, 0, 1, 1);
+    colours[8] = QVector4D(0, 0, 1, 1);
 
     indexes[0] = 0;
     indexes[1] = 1;
     indexes[2] = 2;
-    indexes[3] = 2;
-    indexes[4] = 3;
-    indexes[5] = 0;
+
+    indexes[3] = 0;
+    indexes[4] = 2;
+    indexes[5] = 3;
+
+    indexes[6] = 0;
+    indexes[7] = 3;
+    indexes[8] = 4;
+
+    indexes[9] = 0;
+    indexes[10] = 4;
+    indexes[11] = 5;
+
+    indexes[12] = 0;
+    indexes[13] = 5;
+    indexes[14] = 6;
+
+    indexes[15] = 0;
+    indexes[16] = 6;
+    indexes[17] = 7;
+
+    indexes[18] = 0;
+    indexes[19] = 7;
+    indexes[20] = 8;
+
+    indexes[21] = 0;
+    indexes[22] = 8;
+    indexes[23] = 1;
 
     vao = new QOpenGLVertexArrayObject(this);
     vao->create();
@@ -56,7 +93,7 @@ void GraphViewer::createVBOs(){
     vboColours->setUsagePattern(QOpenGLBuffer::StaticDraw);
     vboColours->create();
     vboColours->bind();
-    vboColours->allocate(colours, 4 * sizeof(QVector4D));
+    vboColours->allocate(colours, 9 * sizeof(QVector4D));
 
     shaderProgram->enableAttributeArray("vColours");
     shaderProgram->setAttributeBuffer("vColours", GL_FLOAT, 0, 4, 0);
@@ -70,7 +107,7 @@ void GraphViewer::createVBOs(){
     vboVertexes->setUsagePattern(QOpenGLBuffer::StaticDraw);
     vboVertexes->create();
     vboVertexes->bind();
-    vboVertexes->allocate(vertexes, 4 * sizeof(QVector4D));
+    vboVertexes->allocate(vertexes, 9 * sizeof(QVector4D));
 
     shaderProgram->enableAttributeArray("vPosition");
     shaderProgram->setAttributeBuffer("vPosition", GL_FLOAT, 0, 4, 0);
@@ -83,7 +120,7 @@ void GraphViewer::createVBOs(){
     vboIndexes->setUsagePattern(QOpenGLBuffer::StaticDraw);
     vboIndexes->create();
     vboIndexes->bind();
-    vboIndexes->allocate(indexes, 2 * 3 * sizeof(unsigned int));
+    vboIndexes->allocate(indexes, 8 * 3 * sizeof(unsigned int));
 
     vboIndexes->release();
     delete [] indexes;
@@ -185,7 +222,7 @@ void GraphViewer::paintGL(){
     shaderProgram->bind();
 
     vboIndexes->bind();
-    glDrawElements(GL_TRIANGLES, 2 * 3, GL_UNSIGNED_INT, nullptr);
+    glDrawElements(GL_TRIANGLES, 8 * 3, GL_UNSIGNED_INT, nullptr);
     vboIndexes->release();
 
     vao->release();
