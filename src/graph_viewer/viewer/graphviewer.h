@@ -18,10 +18,13 @@ public:
     void createShaders();
     void destroyShaders();
 
+    void setViewScale(float scale);
     void setBackgroundColour(float r, float g, float b, float a);
 
 private:
+    int x_off, y_off;
     float bgR, bgG, bgB, bgA;
+    float view_scale;
 
     QOpenGLBuffer *vboColours;
     QOpenGLBuffer *vboIndexes;

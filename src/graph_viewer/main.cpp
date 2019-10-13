@@ -6,7 +6,7 @@
 int main(int argc, char *argv[])
 {
     QSurfaceFormat format;
-    format.setVersion(3, 3);
+    format.setVersion(4, 1);
 
 #if __unix__
     format.setProfile(QSurfaceFormat::CoreProfile);

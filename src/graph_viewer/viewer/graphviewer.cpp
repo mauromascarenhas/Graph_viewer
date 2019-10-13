@@ -10,6 +10,8 @@ GraphViewer::GraphViewer(QWidget *parent) :
     fragmentShader = vertexShader = nullptr;
     vboColours = vboIndexes = vboVertexes = nullptr;
 
+    view_scale = 1.f;
+    x_off = y_off = 0;
     bgR = bgG = bgB = bgA = 0;
 }
 
@@ -192,6 +194,14 @@ void GraphViewer::destroyShaders(){
         delete shaderProgram;
         shaderProgram = nullptr;
     }
+}
+
+void GraphViewer::setViewScale(float scale){
+    view_scale = scale;
+
+    makeCurrent();
+    //TODO: Resize?
+    update();
 }
 
 void GraphViewer::setBackgroundColour(float r, float g, float b, float a){

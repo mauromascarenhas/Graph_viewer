@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 
+#include "graphds.h"
 #include "edgeattributes.h"
 #include "nodeattributes.h"
 
@@ -23,6 +24,8 @@ private:
 
    EdgeAttributes edgeEditor;
    NodeAttributes nodeEditor;
+
+   GraphDS graph;
 
 private slots:
     void bgColourChanged();

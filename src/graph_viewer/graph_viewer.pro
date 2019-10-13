@@ -16,11 +16,15 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 INCLUDEPATH += viewer/ \
-    editors/
+    editors/ \
+    graph/
 
 SOURCES += \
     editors/edgeattributes.cpp \
     editors/nodeattributes.cpp \
+    graph/graphds.cpp \
+    graph/graphedge.cpp \
+    graph/graphnode.cpp \
     main.cpp \
     mainwindow.cpp \
     viewer/graphviewer.cpp
@@ -28,6 +32,9 @@ SOURCES += \
 HEADERS += \
     editors/edgeattributes.h \
     editors/nodeattributes.h \
+    graph/graphds.h \
+    graph/graphedge.h \
+    graph/graphnode.h \
     mainwindow.h \
     viewer/graphviewer.h
 
