@@ -1,6 +1,7 @@
 #ifndef EDGEATTRIBUTES_H
 #define EDGEATTRIBUTES_H
 
+#include <QCloseEvent>
 #include <QMainWindow>
 #include <QColorDialog>
 #include <QListWidgetItem>
@@ -20,6 +21,7 @@ public:
     ~EdgeAttributes();
 
     void setAvailableNodes(const QStringList &nodes);
+    void setEditEdge(GraphEdge *edge);
 
 public slots:
     void clear();
@@ -31,10 +33,15 @@ private:
     QColor selColour;
     QColorDialog cDlg;
 
+    GraphEdge *edit;
+
+protected:
+    void closeEvent(QCloseEvent *evnt);
+
 signals:
     void edgeAdded(GraphEdge *edge);
     //TODO: Include old relation and new attribs
-    void edgeUpdated();
+    void edgeEdited();
 };
 
 #endif // EDGEATTRIBUTES_H

@@ -26,6 +26,35 @@ bool GraphDS::addEdge(GraphEdge *edge){
     return true;
 }
 
+bool GraphDS::updateNode(GraphNode *node, const GraphNode &newValues){
+    for (GraphNode *n : g_nodes)
+        if (newValues.name() == n->name()) return false;
+
+    for (GraphEdge *edge : g_edges){
+        if (edge->label().startsWith(node->name())) edge->setFirstNode(newValues.name());
+        else if (edge->label().endsWith(node->name())) edge->setSecondNode(newValues.name());
+    }
+
+    node->setName(newValues.name());
+    node->setDesc(newValues.desc());
+    node->setColour(newValues.colour());
+    node->setWeight(newValues.weight());
+    node->setPos(newValues.pos());
+
+    return true;
+}
+
+bool GraphDS::updateEdge(GraphEdge *edge, const GraphEdge &newVal){
+    if (g_edges.contains(newVal.label())) return false;
+
+    edge->setDesc(newVal.desc());
+    edge->setColour(newVal.colour());
+    edge->setWeight(newVal.weight());
+    edge->setFirstNode(newVal.firstNodeName());
+    edge->setSecondNode(newVal.secondNodeName());
+    return true;
+}
+
 bool GraphDS::removeNode(const QString &name){
     for (int i = 0; i < g_nodes.length(); ++i){
         if (g_nodes.at(i)->name() == name){

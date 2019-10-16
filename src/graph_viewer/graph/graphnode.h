@@ -13,7 +13,10 @@ public:
     ~GraphNode();
 
     inline void setPos(const QVector4D &pos) { this->nodePos = pos; }
-    inline void setName(const QString &name) { this->nodeName = name; }
+    inline void setName(const QString &name) {
+        this->nodeName = name;
+        if (this->l_view) this->l_view->setText(name);
+    }
     inline void setDesc(const QString &desc) {
         if (this->l_view) this->l_view->setToolTip(desc);
         this->nodeDesc = desc;

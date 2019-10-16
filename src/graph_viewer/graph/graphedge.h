@@ -12,8 +12,14 @@ public:
     explicit GraphEdge(const QString &firstNode = "", const QString &secondNode= "");
     ~GraphEdge();
 
-    inline void setFirstNode(const QString &nodeName) { this->node1Name = nodeName; }
-    inline void setSecondNode(const QString &nodeName) { this->node2Name = nodeName; }
+    inline void setFirstNode(const QString &nodeName) {
+        this->node1Name = nodeName;
+        if (this->l_view) this->l_view->setText(this->node1Name + " <---> " + this->node2Name);
+    }
+    inline void setSecondNode(const QString &nodeName) {
+        this->node2Name = nodeName;
+        if (this->l_view) this->l_view->setText(this->node1Name + " <---> " + this->node2Name);
+    }
 
     inline void setDesc(const QString &desc) {
         if (this->l_view) this->l_view->setToolTip(desc);

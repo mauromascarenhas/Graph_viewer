@@ -27,6 +27,8 @@ EdgeAttributes::EdgeAttributes(QWidget *parent) :
     });
 
     connect(ui->btSave, &QPushButton::clicked, this, &EdgeAttributes::trySave);
+
+    edit = nullptr;
 }
 
 EdgeAttributes::~EdgeAttributes()
@@ -40,6 +42,18 @@ void EdgeAttributes::setAvailableNodes(const QStringList &nodes){
     ui->cbNodeA->addItems(nodes);
 }
 
+void EdgeAttributes::setEditEdge(GraphEdge *edge){
+    edit = edge;
+    ui->edtDesc->setText(edge->desc());
+    ui->cbNodeB->setCurrentText(edge->secondNodeName());
+    ui->cbNodeA->setCurrentText(edge->firstNodeName());
+    ui->sbWeight->setValue(edge->weight());
+
+    selColour = edge->colour();
+    ui->btColourChooser->setStyleSheet(QString("background: rgb(%1, %2, %3);")
+                                              .arg(selColour.red()).arg(selColour.green()).arg(selColour.blue()));
+}
+
 void EdgeAttributes::clear(){
     ui->edtDesc->setText("");
     ui->cbNodeB->clear();
@@ -49,9 +63,22 @@ void EdgeAttributes::clear(){
 }
 
 void EdgeAttributes::trySave(){
+    if (edit){
+        GraphEdge edge(ui->cbNodeA->currentText(), ui->cbNodeB->currentText());
+        edge.setDesc(ui->edtDesc->text());
+        edge.setWeight(ui->sbWeight->value());
+        edge.setColour(selColour);
+        emit edgeEdited();
+    }
+
     GraphEdge *edge = new GraphEdge(ui->cbNodeA->currentText(), ui->cbNodeB->currentText());
     edge->setDesc(ui->edtDesc->text());
     edge->setWeight(ui->sbWeight->value());
     edge->setColour(selColour);
     emit edgeAdded(edge);
+}
+
+void EdgeAttributes::closeEvent(QCloseEvent *evnt){
+    if (edit) edit = nullptr;
+    QMainWindow::closeEvent(evnt);
 }

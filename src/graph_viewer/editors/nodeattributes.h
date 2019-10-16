@@ -2,6 +2,7 @@
 #define NODEATTRIBUTES_H
 
 #include <QColor>
+#include <QCloseEvent>
 #include <QMainWindow>
 #include <QMessageBox>
 #include <QColorDialog>
@@ -23,9 +24,14 @@ public:
     explicit NodeAttributes(QWidget *parent = nullptr);
     ~NodeAttributes();
 
+    void setEditNode(GraphNode *node);
+
 public slots:
     void clear();
     void trySave();
+
+protected:
+    void closeEvent(QCloseEvent *evnt);
 
 private:
     Ui::NodeAttributes *ui;
@@ -33,10 +39,11 @@ private:
     QColor selColour;
     QColorDialog cDlg;
 
+    GraphNode *edit;
+
 signals:
     void nodeAdded(GraphNode *node);
-    //TODO: Include old relation and new attribs
-    void nodeUpdated();
+    void nodeEdited(GraphNode *node, const GraphNode &newValues);
 };
 
 #endif // NODEATTRIBUTES_H

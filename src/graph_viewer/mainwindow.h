@@ -1,6 +1,8 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <QMenu>
+#include <QPoint>
 #include <QMainWindow>
 
 #include "graphds.h"
@@ -28,7 +30,11 @@ private:
    GraphDS graph;
 
 private slots:
-    void bgColourChanged();
+   void editEdge();
+   void editNode();
+   void removeEdge();
+   void removeNode();
+   void bgColourChanged();
 };
 #endif // MAINWINDOW_H
 
