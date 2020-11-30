@@ -3,6 +3,7 @@
 
 #include <QHash>
 #include <QObject>
+#include <QOpenGLWidget>
 
 #include "graphedge.h"
 #include "graphnode.h"

@@ -40,8 +40,7 @@ protected:
 
 signals:
     void edgeAdded(GraphEdge *edge);
-    //TODO: Include old relation and new attribs
-    void edgeEdited();
+    void edgeEdited(GraphEdge *edge, const GraphEdge &newValues);
 };
 
 #endif // EDGEATTRIBUTES_H

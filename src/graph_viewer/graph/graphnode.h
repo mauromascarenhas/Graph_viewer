@@ -4,12 +4,15 @@
 #include <QColor>
 #include <QString>
 #include <QVector4D>
+#include <QOpenGLWidget>
 #include <QListWidgetItem>
+
+#include "graphobject.h"
 
 class GraphNode
 {
 public:
-    explicit GraphNode(const QString &name = "");
+    explicit GraphNode(QOpenGLWidget *view = nullptr, const QString &name = "");
     ~GraphNode();
 
     inline void setPos(const QVector4D &pos) { this->nodePos = pos; }
@@ -40,6 +43,8 @@ public:
                 this->nodeWeight == other.nodeWeight;
     }
 
+    inline void draw() { attObj->draw(); }
+
 private:
     QString nodeName;
     QString nodeDesc;
@@ -48,6 +53,8 @@ private:
     QColor nodeColour;
 
     unsigned short nodeWeight;
+
+    GraphObject *attObj;
 
     QListWidgetItem *l_view;
 };

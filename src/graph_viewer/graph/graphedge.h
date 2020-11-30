@@ -5,11 +5,13 @@
 #include <QListWidgetItem>
 
 #include "graphnode.h"
+#include "graphobject.h"
 
 class GraphEdge
 {
 public:
-    explicit GraphEdge(const QString &firstNode = "", const QString &secondNode= "");
+    explicit GraphEdge(QOpenGLWidget *view = nullptr,
+                       const QString &firstNode = "", const QString &secondNode= "");
     ~GraphEdge();
 
     inline void setFirstNode(const QString &nodeName) {
@@ -38,6 +40,8 @@ public:
 
     inline QListWidgetItem *view() { return this->l_view; }
 
+    inline void draw() { attObj->draw(); }
+
 private:
     QString node1Name;
     QString node2Name;
@@ -46,6 +50,8 @@ private:
     QColor edgeColour;
 
     unsigned short edgeWeight;
+
+    GraphObject *attObj;
 
     QListWidgetItem *l_view;
 };

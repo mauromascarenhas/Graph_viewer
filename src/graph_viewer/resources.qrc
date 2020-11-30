@@ -15,4 +15,7 @@
         <file>icons/save_as_w.svg</file>
         <file>icons/save_w.svg</file>
     </qresource>
+    <qresource prefix="/models">
+        <file>off_resources/sphere.off</file>
+    </qresource>
 </RCC>

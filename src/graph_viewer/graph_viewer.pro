@@ -17,6 +17,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 INCLUDEPATH += viewer/ \
     editors/ \
+    object/ \
     graph/
 
 SOURCES += \
@@ -25,6 +26,7 @@ SOURCES += \
     graph/graphds.cpp \
     graph/graphedge.cpp \
     graph/graphnode.cpp \
+    object/graphobject.cpp \
     main.cpp \
     mainwindow.cpp \
     viewer/graphviewer.cpp
@@ -35,6 +37,7 @@ HEADERS += \
     graph/graphds.h \
     graph/graphedge.h \
     graph/graphnode.h \
+    object/graphobject.h \
     mainwindow.h \
     viewer/graphviewer.h
 

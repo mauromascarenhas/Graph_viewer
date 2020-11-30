@@ -7,6 +7,9 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    edgeEditor = new EdgeAttributes(ui->graphViewer);
+    nodeEditor = new NodeAttributes(ui->graphViewer);
+
     ui->lwEdges->setContextMenuPolicy(Qt::CustomContextMenu);
     ui->lwNodes->setContextMenuPolicy(Qt::CustomContextMenu);
 
@@ -19,46 +22,50 @@ MainWindow::MainWindow(QWidget *parent)
         for (GraphNode *node: graph.nodes())
             aNodes << node->name();
 
-        edgeEditor.clear();
-        edgeEditor.setAvailableNodes(aNodes);
-        edgeEditor.show();
+        edgeEditor->clear();
+        edgeEditor->setAvailableNodes(aNodes);
+        edgeEditor->show();
     });
 
     connect(ui->btDeleteEdge, &QPushButton::clicked, this, &MainWindow::removeEdge);
 
     connect(ui->btCreateNode, &QPushButton::clicked, [this]{
-        nodeEditor.clear();
-        nodeEditor.show();
+        nodeEditor->clear();
+        nodeEditor->show();
     });
 
     connect(ui->btDeleteNode, &QPushButton::clicked, this, &MainWindow::removeNode);
 
-    connect(&nodeEditor, &NodeAttributes::nodeAdded, [this](GraphNode *node){
+    connect(nodeEditor, &NodeAttributes::nodeAdded, [this](GraphNode *node){
         if (graph.addNode(node)){
             ui->lwNodes->addItem(node->view());
             ui->btDeleteNode->setEnabled(true);
-            nodeEditor.close();
+            nodeEditor->close();
         }
         else delete node;
     });
 
-    connect(&edgeEditor, &EdgeAttributes::edgeAdded, [this](GraphEdge *edge){
+    connect(edgeEditor, &EdgeAttributes::edgeAdded, [this](GraphEdge *edge){
         if (graph.addEdge(edge)){
             ui->lwEdges->addItem(edge->view());
             ui->btDeleteEdge->setEnabled(true);
-            edgeEditor.close();
+            edgeEditor->close();
         }
         else delete edge;
     });
 
-    connect(&nodeEditor, &NodeAttributes::nodeEdited, [this](GraphNode *node, const GraphNode &newValues){
-        if (graph.updateNode(node, newValues)) nodeEditor.close();
-        //TODO: Add else with warning!
+    connect(nodeEditor, &NodeAttributes::nodeEdited, [this](GraphNode *node, const GraphNode &newValues){
+        if (graph.updateNode(node, newValues)) nodeEditor->close();
+        else QMessageBox::critical(nullptr, tr("Critical"), tr("It was not possible to save your last changes (%1). "
+                                                               "It would cause inconsistence in the "
+                                                               "generated graph, otherwise.").arg(tr("graph node")));
     });
 
-    connect(&edgeEditor, &EdgeAttributes::edgeEdited, [this](GraphEdge *edge, const GraphEdge &newValues){
-        if (graph.updateEdge(edge, newValues)) edgeEditor.close();
-        //TODO: Add else with warning!
+    connect(edgeEditor, &EdgeAttributes::edgeEdited, [this](GraphEdge *edge, const GraphEdge &newValues){
+        if (graph.updateEdge(edge, newValues)) edgeEditor->close();
+        else QMessageBox::critical(nullptr, tr("Critical"), tr("It was not possible to save your last changes (%1). "
+                                                               "It would cause inconsistence in the "
+                                                               "generated graph, otherwise.").arg(tr("graph edge")));
     });
 
     connect(ui->lwEdges, &QListWidget::customContextMenuRequested, [this](const QPoint &p){
@@ -98,6 +105,9 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
+    delete edgeEditor;
+    delete nodeEditor;
+
     delete ui;
 }
 
@@ -113,17 +123,17 @@ void MainWindow::editEdge(){
         for (GraphNode *node: graph.nodes())
             aNodes << node->name();
 
-        edgeEditor.clear();
-        edgeEditor.setAvailableNodes(aNodes);
-        edgeEditor.setEditEdge(graph.edge(ui->lwEdges->currentItem()->text()));
-        edgeEditor.show();
+        edgeEditor->clear();
+        edgeEditor->setAvailableNodes(aNodes);
+        edgeEditor->setEditEdge(graph.edge(ui->lwEdges->currentItem()->text()));
+        edgeEditor->show();
     }
 }
 
 void MainWindow::editNode(){
     if (ui->lwNodes->currentRow() > -1){
-        nodeEditor.setEditNode(graph.nodes().at(ui->lwNodes->currentRow()));
-        nodeEditor.show();
+        nodeEditor->setEditNode(graph.nodes().at(ui->lwNodes->currentRow()));
+        nodeEditor->show();
     }
 }
 

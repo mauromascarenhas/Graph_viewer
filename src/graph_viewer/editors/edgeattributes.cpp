@@ -64,14 +64,15 @@ void EdgeAttributes::clear(){
 
 void EdgeAttributes::trySave(){
     if (edit){
-        GraphEdge edge(ui->cbNodeA->currentText(), ui->cbNodeB->currentText());
+        GraphEdge edge(nullptr, ui->cbNodeA->currentText(), ui->cbNodeB->currentText());
         edge.setDesc(ui->edtDesc->text());
         edge.setWeight(ui->sbWeight->value());
         edge.setColour(selColour);
-        emit edgeEdited();
+        emit edgeEdited(edit, edge);
+        return;
     }
 
-    GraphEdge *edge = new GraphEdge(ui->cbNodeA->currentText(), ui->cbNodeB->currentText());
+    GraphEdge *edge = new GraphEdge(static_cast<QOpenGLWidget*>(parentWidget()), ui->cbNodeA->currentText(), ui->cbNodeB->currentText());
     edge->setDesc(ui->edtDesc->text());
     edge->setWeight(ui->sbWeight->value());
     edge->setColour(selColour);

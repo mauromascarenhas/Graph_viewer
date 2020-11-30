@@ -51,7 +51,7 @@ void NodeAttributes::clear(){
 
 void NodeAttributes::trySave(){
     if (edit){
-        GraphNode node(ui->edtName->text());
+        GraphNode node(nullptr, ui->edtName->text());
         node.setDesc(ui->edtDescription->text());
         node.setPos(QVector4D(ui->btPosX->value(), ui->btPosY->value(), ui->btPosZ->value(), 1));
         node.setWeight(ui->sbWeight->value());
@@ -68,7 +68,7 @@ void NodeAttributes::trySave(){
         return;
     }
 
-    GraphNode *node = new GraphNode(ui->edtName->text());
+    GraphNode *node = new GraphNode(static_cast<QOpenGLWidget*>(parentWidget()), ui->edtName->text());
     node->setDesc(ui->edtDescription->text());
     node->setPos(QVector4D(ui->btPosX->value(), ui->btPosY->value(), ui->btPosZ->value(), 1));
     node->setWeight(ui->sbWeight->value());

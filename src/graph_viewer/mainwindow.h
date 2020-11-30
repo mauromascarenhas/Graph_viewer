@@ -24,8 +24,8 @@ public:
 private:
     Ui::MainWindow *ui;
 
-   EdgeAttributes edgeEditor;
-   NodeAttributes nodeEditor;
+   EdgeAttributes *edgeEditor;
+   NodeAttributes *nodeEditor;
 
    GraphDS graph;
 
